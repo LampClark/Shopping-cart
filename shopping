@@ -1,0 +1,39 @@
+# Customer may enter their name at the start of the checkout process
+def get_name
+    puts "Hello! Welcome to Baratas Supermarket."
+    puts "Please type your name:"
+    @customer_name = gets.chomp.upcase
+    puts "Hi #{@customer_name}"
+end
+
+# Customer may enter multiple item prices (until the customer choose to finish entering prices of each item)
+# Prices entered may only be either of Integer or Float data type only, anything else should throw a message to the customer asking them to reenter the prices.
+# Customer may enter a discount voucher code or skip it if they wish so
+# If the voucher code is invalid, then tell the customer about it and let them reenter the voucher code, or skip the voucher code altogether. Assume that the voucher code applies a fixed percentage discount to the total of purchase in all circumstances.
+# The end price should be shown together with the voucher code applied (if any), and how much discount (in percentage was applied).
+# Customers will enter the amount to be paid in cash into the system. Again, the amount to be paid must either only be in Integer or Float.
+# If the amount paid is equal or greater than the final amount displayed, then finish the transaction by greeting ‘Thanks’ (or anything equivalent) to the customer together with the change (if any).
+# If the amount paid is less than the final amount displayed, then ask the customer to re-enter the amount until they enter an amount equal or greater than the displayed final amount.
+
+def item_count
+    item_prices = []
+
+    loop do
+        puts "Enter the price of an item (type 'P' and hit enter to finish.):"
+    input = gets.chomp
+    
+    break if input.downcase == "p"
+
+    item_price = input.to_f
+    item_prices << item_price
+    end
+
+    total_price = item_prices.sum
+
+    puts "Thank you, #{@customer_name}, for shopping!"
+    puts "Your total is RM #{total_price}"
+end
+
+
+get_name
+item_count
