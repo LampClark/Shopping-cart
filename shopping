@@ -30,10 +30,55 @@ def item_count
 
     total_price = item_prices.sum
 
+    total_discount = apply_discount(total_price)
+
     puts "Thank you, #{@customer_name}, for shopping!"
     puts "Your total is RM #{total_price}"
+    if total_discount != total_price
+        puts "After apply the discount, your end price is RM #{total_discount}."
+    end
 end
 
+def apply_discount(price)
+    discount_percentage = 20 # 20% discount
+    puts "Do you have a discount voucher? (yes/no)"
+    input_voucher = gets.chomp.downcase
+
+    if input_voucher.downcase == "yes"
+        voucher_code = nil
+
+        loop do
+            puts "Please enter the voucher code:"
+            voucher_code = gets.chomp.upcase
+
+            if voucher_code_valid?(voucher_code)
+                break
+            else
+                puts "Invalid voucher code. Would you like to retype the voucher code? (yes/no)"
+                retype_input = gets.chomp.downcase
+                break if retype_input == "no"
+            end
+        end
+
+        if voucher_code_valid?(voucher_code)
+            discount_price = price - (price * discount_percentage / 100)
+
+            puts "Congratulations! Voucher code applied."
+            puts "Discount applied: #{discount_percentage}"
+            return discount_price
+        else
+            puts "Skipping discount."
+        end
+    end
+
+    price
+end
+
+def voucher_code_valid?(code)
+    valid_codes = ["GHOST20", "SUMMERSALE20", "MEOWCAT20", "NYANYA20"]
+    valid_codes.include?(code)
+end
 
 get_name
 item_count
+get_name
