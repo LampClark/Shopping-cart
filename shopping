@@ -79,6 +79,7 @@ def voucher_code_valid?(code)
     valid_codes.include?(code)
 end
 
+loop do
 get_name
 item_count
-get_name
+end
