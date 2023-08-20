@@ -37,6 +37,7 @@ def item_count
     if total_discount != total_price
         puts "After apply the discount, your end price is RM #{total_discount}."
     end
+    get_payment(total_discount)
 end
 
 def apply_discount(price)
@@ -77,6 +78,22 @@ end
 def voucher_code_valid?(code)
     valid_codes = ["GHOST20", "SUMMERSALE20", "MEOWCAT20", "NYANYA20"]
     valid_codes.include?(code)
+end
+
+def get_payment(cash)
+    loop do
+        puts "Please enter the amount you're paying:"
+        cash_amount = gets.chomp.to_f
+
+        if cash_amount < cash
+            puts "The payment amount is less than amount. Please enter an amount RM #{cash}."
+        else
+            change = cash_amount - cash
+            puts "Thank you for your payment of RM #{cash_amount}. Your change: RM #{change}."
+            puts "Thanks for shopping!!!"
+            break
+        end
+    end
 end
 
 loop do
